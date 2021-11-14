@@ -1,5 +1,5 @@
 const express = require('express')
-const { MongoClient } = require('mongodb');
+const { MongoClient, Admin } = require('mongodb');
 require('dotenv').config()
 const cors = require('cors')
 const app = express()
@@ -87,6 +87,16 @@ async function run(){
           const cursor=usersCollection.find({});
           const products =await cursor.toArray();
           res.send(products);
+      })
+      app.get("/users/:email",async(req,res)=>{
+        const email=req.params.email;
+        const query={email:email}
+        const user =await usersCollection.findOne(query)
+        let isAdmin =false
+        if(user?.role ==='admin'){
+          isAdmin=true
+        }
+        res.json({admin:isAdmin})
       })
         //update user
         app.put("/users",async(req,rse)=>{
