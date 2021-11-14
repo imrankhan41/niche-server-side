@@ -18,6 +18,7 @@ async function run(){
         const productsCollection= database.collection("products");
         const orderCollection =database.collection("orders");
         const reviewsCollection =database.collection("reviews");
+        const blogsCollection =database.collection("blogs");
         console.log('connected')
             //Get API
             app.get("/products",async(req,res)=>{
@@ -56,6 +57,25 @@ async function run(){
                 const products =await cursor.toArray();
                 res.send(products);
             })
+             //post blogsto get blogs
+             app.post("/blogs",async(req,res)=>{
+              const blogs=req.body;
+              const result = await  blogsCollection.insertOne(blogs);
+              res.json(result)
+          })
+           //Get blogs
+           app.get("/blogs",async(req,res)=>{
+            const cursor=blogsCollection.find({});
+            const products =await cursor.toArray();
+            res.send(products);
+        })
+        app.get("/blogs/:id",async(req,res)=>{
+          const id=req.params.id;
+          console.log(id)
+          const query ={_id:ObjectId(id)};
+          const result = await blogsCollection.findOne(query);
+          res.send(result)
+        })
       } finally {
         // await client.close();
       }
