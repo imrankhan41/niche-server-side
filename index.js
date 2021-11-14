@@ -21,7 +21,7 @@ async function run(){
         const blogsCollection =database.collection("blogs");
         const usersCollection =database.collection("users");
         console.log('connected')
-            //Get API
+            //Get 
             app.get("/products",async(req,res)=>{
                 const cursor=productsCollection.find({});
                 const products =await cursor.toArray();
