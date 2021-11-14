@@ -46,6 +46,12 @@ async function run(){
                 const result = await  orderCollection.insertOne(orders);
                 res.json(result)
             })
+             //Get API
+            app.get("/orders",async(req,res)=>{
+                const cursor=orderCollection.find({});
+                const products =await cursor.toArray();
+                res.send(products);
+            })
           //post review to get review 
             app.post("/reviews",async(req,res)=>{
                 const orders =req.body;
