@@ -17,6 +17,7 @@ async function run(){
         const database = client.db("niche");
         const productsCollection= database.collection("products");
         const orderCollection =database.collection("orders");
+        const reviewsCollection =database.collection("reviews");
         console.log('connected')
             //Get API
             app.get("/products",async(req,res)=>{
@@ -46,8 +47,14 @@ async function run(){
           //post review to get review 
             app.post("/reviews",async(req,res)=>{
                 const orders =req.body;
-                const result = await  orderCollection.insertOne(orders);
+                const result = await  reviewsCollection.insertOne(orders);
                 res.json(result)
+            })
+               //Get API
+               app.get("/reviews",async(req,res)=>{
+                const cursor=reviewsCollection.find({});
+                const products =await cursor.toArray();
+                res.send(products);
             })
       } finally {
         // await client.close();
