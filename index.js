@@ -19,6 +19,7 @@ async function run(){
         const orderCollection =database.collection("orders");
         const reviewsCollection =database.collection("reviews");
         const blogsCollection =database.collection("blogs");
+        const usersCollection =database.collection("users");
         console.log('connected')
             //Get API
             app.get("/products",async(req,res)=>{
@@ -75,6 +76,12 @@ async function run(){
           const query ={_id:ObjectId(id)};
           const result = await blogsCollection.findOne(query);
           res.send(result)
+        })
+          //post user to get user
+          app.post("/users",async(req,res)=>{
+            const users=req.body;
+            const result = await  usersCollection.insertOne(users);
+            res.json(result)
         })
       } finally {
         // await client.close();
