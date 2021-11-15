@@ -49,11 +49,11 @@ async function run(){
             })
 
             //  Get API
-            app.get("/orders",async(req,res)=>{
-                const cursor=orderCollection.find({});
-                const products =await cursor.toArray();
-                res.send(products);
-            })
+            // app.get("/orders",async(req,res)=>{
+            //     const cursor=orderCollection.find({});
+            //     const products =await cursor.toArray();
+            //     res.send(products);
+            // })
              //Get API
             app.get("/orders",async(req,res)=>{
               const email =req.query.email
