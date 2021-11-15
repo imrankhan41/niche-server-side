@@ -21,7 +21,7 @@ async function run(){
         const blogsCollection =database.collection("blogs");
         const usersCollection =database.collection("users");
         console.log('connected')
-            //Get 
+            //Get ptoducts
             app.get("/products",async(req,res)=>{
                 const cursor=productsCollection.find({});
                 const products =await cursor.toArray();
@@ -33,6 +33,7 @@ async function run(){
             const result = await productsCollection.insertOne(products);
             res.json(result)
         })
+        //get single products
         app.get("/products/:id",async(req,res)=>{
             const id=req.params.id;
             console.log(id)
@@ -64,7 +65,7 @@ async function run(){
                 const products =await cursor.toArray();
                 res.send(products);
             })
-             //post blogsto get blogs
+             //post blogs to get blogs
              app.post("/blogs",async(req,res)=>{
               const blogs=req.body;
               const result = await  blogsCollection.insertOne(blogs);
