@@ -48,21 +48,21 @@ async function run(){
                 res.json(result)
             })
 
-            //  Get API
-            // app.get("/orders",async(req,res)=>{
-            //     const cursor=orderCollection.find({});
-            //     const products =await cursor.toArray();
-            //     res.send(products);
-            // })
-             //Get API
+             //Get AP
             app.get("/orders",async(req,res)=>{
-              const email =req.query.email
-              const query={email:email}
-              console.log(query)
-                const cursor=orderCollection.find(query);
+                const cursor=orderCollection.find({});
                 const products =await cursor.toArray();
                 res.send(products);
             })
+             //Get API
+            // app.get("/orders",async(req,res)=>{
+            //   const email =req.query.email
+            //   const query={email:email}
+            //   console.log(query)
+            //     const cursor=orderCollection.find(query);
+            //     const products =await cursor.toArray();
+            //     res.send(products);
+            // })
             //get single orders
             app.get("/orders/:id",async(req,res)=>{
               const id=req.params.id;
