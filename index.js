@@ -47,11 +47,20 @@ async function run(){
                 const result = await  orderCollection.insertOne(orders);
                 res.json(result)
             })
+
              //Get API
             app.get("/orders",async(req,res)=>{
                 const cursor=orderCollection.find({});
                 const products =await cursor.toArray();
                 res.send(products);
+            })
+            //get single orders
+            app.get("/orders/:id",async(req,res)=>{
+              const id=req.params.id;
+              console.log(id)
+              const query ={_id:ObjectId(id)};
+              const result = await orderCollection.findOne(query);
+              res.send(result)
             })
           //post review to get review 
             app.post("/reviews",async(req,res)=>{
