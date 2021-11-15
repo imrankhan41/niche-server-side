@@ -57,11 +57,18 @@ async function run(){
             //get single orders
             app.get("/orders/:id",async(req,res)=>{
               const id=req.params.id;
-              console.log(id)
-              const query ={_id:ObjectId(id)};
+            console.log(id)
+            const query ={_id:ObjectId(id)};
               const result = await orderCollection.findOne(query);
               res.send(result)
             })
+             //api delete
+          app.delete("/orders/:id",async(req,res)=>{
+            const id=req.params.id;
+            const query ={_id:ObjectId(id)};
+            const result = await orderCollection.deleteOne(query);
+            res.json(result)
+          })
           //post review to get review 
             app.post("/reviews",async(req,res)=>{
                 const orders =req.body;
