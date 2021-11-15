@@ -8,7 +8,7 @@ app.use(cors());
 const ObjectId = require("mongodb").ObjectId;
 app.use(express.json())
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.qoa3n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-console.log(uri)
+
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 async function run(){
@@ -49,16 +49,17 @@ async function run(){
             })
 
             //  Get API
-            app.get("/orders",async(req,res)=>{
-                const cursor=orderCollection.find({});
-                const products =await cursor.toArray();
-                res.send(products);
-            })
+            // app.get("/orders",async(req,res)=>{
+            //     const cursor=orderCollection.find({});
+            //     const products =await cursor.toArray();
+            //     res.send(products);
+            // })
              //Get API
             app.get("/orders",async(req,res)=>{
               const email =req.query.email
               const query={email:email}
-                const cursor=orderCollection.find({query});
+              console.log(query)
+                const cursor=orderCollection.find(query);
                 const products =await cursor.toArray();
                 res.send(products);
             })
