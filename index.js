@@ -69,6 +69,26 @@ async function run(){
             const result = await orderCollection.deleteOne(query);
             res.json(result)
           })
+          //update
+      app.put("/orders/:id",async(req,res)=>{
+        const id=req.params.id;
+        const updatedUser =req.body;
+        const filter ={_id:ObjectId(id)};
+        const options = { upsert: true };
+        const updateDoc = {
+          $set: {
+            name:updatedUser.name,
+            email:updatedUser.email,
+            address:updatedUser.address,
+            city:updatedUser.city,
+            phoneNumber:updatedUser.phoneNumber,
+        }
+          
+        }
+        const result = await orderCollection.updateOne(filter, updateDoc, options);
+        res.json(result)
+        console.log(result)
+        })
           //post review to get review 
             app.post("/reviews",async(req,res)=>{
                 const orders =req.body;
