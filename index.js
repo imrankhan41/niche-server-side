@@ -54,6 +54,14 @@ async function run(){
                 const products =await cursor.toArray();
                 res.send(products);
             })
+             //Get API
+            app.get("/orders",async(req,res)=>{
+              const email =req.query.email
+              const query={email:email}
+                const cursor=orderCollection.find({query});
+                const products =await cursor.toArray();
+                res.send(products);
+            })
             //get single orders
             app.get("/orders/:id",async(req,res)=>{
               const id=req.params.id;
